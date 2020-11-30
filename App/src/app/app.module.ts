@@ -30,6 +30,8 @@ import { SignupButtonComponent } from './components/signup-button/signup-button.
 import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
 import { AuthenticationButtonComponent } from './components/authentication-button/authentication-button.component';
 import { AuthNavComponent } from './components/auth-nav/auth-nav.component';
+import {LandingPage} from './components/landing-page/landing-page.component';
+
 
 
 @NgModule({
@@ -46,6 +48,7 @@ import { AuthNavComponent } from './components/auth-nav/auth-nav.component';
     LogoutButtonComponent,
     AuthenticationButtonComponent,
     AuthNavComponent,
+    LandingPage
   ],
   imports: [
     BrowserModule,
@@ -70,7 +73,7 @@ import { AuthNavComponent } from './components/auth-nav/auth-nav.component';
       ...env.auth,
     }),
   ],
-  exports:[MakeTimetable, ViewTimetableComponent,AlertDialogComponent, SearchCoursesComponent, LoginComponent, HomeOnceAuthed],
+  exports:[MakeTimetable, ViewTimetableComponent,AlertDialogComponent, SearchCoursesComponent, LoginComponent, HomeOnceAuthed, LandingPage],
   providers: [],
   bootstrap: [AppComponent]
 })
