@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TutorialService} from './services/tutorial.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {Router} from "@angular/router";
-import { AuthService } from './services/auth.service';
+import { AuthService } from '@auth0/auth0-angular';
 
 
 @Component({
@@ -18,20 +18,13 @@ export class AppComponent implements OnInit {
   
   constructor(
     private router: Router,
-    public authService: AuthService
+    public auth: AuthService
     ) {
-      this.authService.isAuthenticated.subscribe(
-        (isAuthenticated: boolean)  => this.isAuthenticated = isAuthenticated
-      );
     }
   
  async ngOnInit() {
-  this.isAuthenticated = await this.authService.checkAuthenticated();
-}
+ }
 
-logout() {
-  this.authService.logout('/');
-}
 
 
 

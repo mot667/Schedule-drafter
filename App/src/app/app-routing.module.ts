@@ -4,13 +4,12 @@ import {SearchCoursesComponent} from './components/SearchCourses/search-courses.
 import {MakeTimetable} from './components/MakeTimetable/make-timetable.component';
 import {ViewTimetableComponent} from './components/ViewTimetable/view-timetable.component'
 import { LoginComponent } from './components/login/login.component';
-import { AuthGuardService } from './services/auth-guard.service';
 import { HomeOnceAuthed } from './components/homeOnceAuthed/homeOnceAuthed.component';
-
+import { AuthGuard } from '@auth0/auth0-angular';
 
 //canActivate: [AuthGuardService]
 const routes: Routes = [
-  {path: 'home', component: HomeOnceAuthed},
+  {path: 'home', component: HomeOnceAuthed, canActivate: [AuthGuard]},
   {path:'login', component: LoginComponent},
   {path:'search', component:SearchCoursesComponent},
   {path:'maketimetable', component:MakeTimetable},
