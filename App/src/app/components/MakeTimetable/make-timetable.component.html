@@ -1,0 +1,116 @@
+<div>
+    <mat-horizontal-stepper #stepper>
+      <mat-step [stepControl]="addScheduleFormGroup">
+        <form (ngSubmit) = "addSchedule()" [formGroup]="addScheduleFormGroup">
+          <ng-template matStepLabel>Schedule name</ng-template>
+          <mat-form-field>
+            <mat-label>Schedule name</mat-label>
+            <input matInput placeholder="Name of the new Schedule" formControlName="scheduleName" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext>Create</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="addCourseFormGroup">
+        <form (ngSubmit) = "addCourse()" [formGroup]="addCourseFormGroup">
+          <ng-template matStepLabel>Add courses</ng-template>
+          <mat-form-field>
+            <mat-label>Subject Code</mat-label>
+            <input (keydown.enter) = "addCourse()" matInput formControlName="subjectCode" placeholder="Enter a Subject Code"
+                   required>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <mat-label>Course Code</mat-label>
+            <input (keydown.enter) = "addCourse()" matInput formControlName="courseCode" placeholder="Enter a Course Code"
+                   required>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <mat-label>Course Component</mat-label>
+            <input (keydown.enter) = "addCourse()" matInput formControlName="courseComponent" placeholder="Enter a Course Component"
+                   required>
+          </mat-form-field>
+          <div>
+            <button type="button" mat-button matStepperPrevious>Back</button>
+            <button type="button" mat-button matStepperNext>Next</button>
+            <div>
+            <table mat-table [dataSource]="dataSource">
+              <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              <ng-container *ngFor="let column of displayedColumns">
+                <ng-container [matColumnDef]="column">
+                  <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+                  <td mat-cell *matCellDef="let row">{{row[column]}}</td>
+                </ng-container>
+              </ng-container>
+            </table>
+            </div>
+    
+          </div>
+          <mat-selection-list #courses (selectionChange) = "onNewCourseSelected($event,courses.selectedOptions)">
+          <mat-accordion class="example-headers-align" multi>
+        
+          
+            <mat-expansion-panel *ngFor="let searchResult of searchResults; let i = index">
+              
+              <mat-expansion-panel-header>
+                <mat-list-option [value] = "searchResult">
+                <mat-panel-title>
+                  {{searchResult.className}}  
+                </mat-panel-title>
+                <mat-panel-description>
+                  {{searchResult.subject}}
+                </mat-panel-description>
+              </mat-list-option>
+              </mat-expansion-panel-header>
+              <table mat class="mat-elevation-z8">
+                <ng-container matColumnDef="Section">
+                  <th mat-header-cell>class_nbr</th>
+                  <td>{{searchResult.timetable.class_nbr}}</td>
+                </ng-container>
+                <ng-container matColumnDef="Section">
+                  <th mat-header-cell>Section</th>
+                  <td>{{searchResult.timetable.class_section}}</td>
+                </ng-container>
+                <ng-container matColumnDef="Component">
+                  <th mat-header-cell>Component</th>
+                  <td>{{searchResult.timetable.ssr_component}}</td>
+                </ng-container>
+      
+              </table>
+            
+    
+            </mat-expansion-panel>
+         
+    
+    
+          </mat-accordion>
+        </mat-selection-list>
+          
+    
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Overview</ng-template>
+        <div>
+          <table mat-table [dataSource]="dataSource">
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <ng-container *ngFor="let column of displayedColumns">
+              <ng-container [matColumnDef]="column">
+                <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+                <td mat-cell *matCellDef="let row">{{row[column]}}</td>
+              </ng-container>
+            </ng-container>
+
+          </table>
+          </div>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="saveCourseLoad();stepper.reset() ">Save</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+</div>
