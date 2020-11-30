@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TutorialService} from '../../services/tutorial.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {Router} from "@angular/router";
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '@auth0/auth0-angular';
 
 
 @Component({
@@ -14,25 +14,21 @@ import { AuthService } from '../../services/auth.service';
 export class HomeOnceAuthed implements OnInit {
   title = 'se3316-tkeech2-lab5';
   isAuthenticated: boolean;
+  profileJson: string = null;
 
   
   constructor(
     private router: Router,
-    public authService: AuthService
+    public auth: AuthService
     ) {
-      this.authService.isAuthenticated.subscribe(
-        (isAuthenticated: boolean)  => this.isAuthenticated = isAuthenticated
-      );
     }
   
- async ngOnInit() {
-  this.isAuthenticated = await this.authService.checkAuthenticated();
-}
-
-logout() {
-  this.authService.logout('/');
-}
-
+ ngOnInit(): void{
+    
+    this.auth.user$.subscribe(
+        (profile) => (this.profileJson = JSON.stringify(profile, null, 2))
+      );     
+ } 
 
 
   navigateToTimetable() {
