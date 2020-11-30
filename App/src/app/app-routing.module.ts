@@ -6,9 +6,11 @@ import {ViewTimetableComponent} from './components/ViewTimetable/view-timetable.
 import { LoginComponent } from './components/login/login.component';
 import { HomeOnceAuthed } from './components/homeOnceAuthed/homeOnceAuthed.component';
 import { AuthGuard } from '@auth0/auth0-angular';
+import {LandingPage} from './components/landing-page/landing-page.component';
 
 //canActivate: [AuthGuardService]
 const routes: Routes = [
+  {path: '', component: LandingPage},
   {path: 'home', component: HomeOnceAuthed, canActivate: [AuthGuard]},
   {path:'login', component: LoginComponent},
   {path:'search', component:SearchCoursesComponent},
