@@ -31,7 +31,7 @@ import { LogoutButtonComponent } from './components/logout-button/logout-button.
 import { AuthenticationButtonComponent } from './components/authentication-button/authentication-button.component';
 import { AuthNavComponent } from './components/auth-nav/auth-nav.component';
 import {LandingPage} from './components/landing-page/landing-page.component';
-
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -69,6 +69,7 @@ import {LandingPage} from './components/landing-page/landing-page.component';
     MatSnackBarModule,
     MatTooltipModule,
     MatCardModule,
+    MatSlideToggleModule,
     AuthModule.forRoot({
       ...env.auth,
     }),
