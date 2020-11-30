@@ -7,6 +7,7 @@ import {map, startWith} from 'rxjs/operators';
 import { AlertDialogComponent } from '../alert-dialog/alert-dialog.component';
 import { MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -23,7 +24,7 @@ export class ViewTimetableComponent implements OnInit {
   options: string[] = [];
   filteredOptions: Observable<string[]>;
 
-  constructor(private tutorialService: TutorialService,private dialog: MatDialog, private _snackBar: MatSnackBar) { 
+  constructor(private tutorialService: TutorialService,private dialog: MatDialog, private _snackBar: MatSnackBar,private router: Router) { 
 
     
   }
@@ -106,5 +107,19 @@ export class ViewTimetableComponent implements OnInit {
       }
     )
   }
+
+  
+navigateToTimetable() {
+  this.router.navigate(['search']);
+}
+
+navigateToMakeTimetable() {
+  this.router.navigate(['maketimetable']);
+}
+
+navigateToViewTimetable() {
+  this.router.navigate(['viewtimetable']);
+}
+
 
 }
