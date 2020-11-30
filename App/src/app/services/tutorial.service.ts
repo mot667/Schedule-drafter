@@ -20,6 +20,11 @@ export class TutorialService {
     return this.http.post(`${baseUrl}/timetable/createTimeTable`,name);
   }
 
+
+
+
+
+
   getTimetables(): Observable<any> {
     return this.http.get(`${baseUrl}/timetable`);
   }
