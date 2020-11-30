@@ -123,6 +123,17 @@ saveCourseLoad() {
     
   
 }
+navigateToTimetable() {
+  this.router.navigate(['search']);
+}
+
+navigateToMakeTimetable() {
+  this.router.navigate(['maketimetable']);
+}
+
+navigateToViewTimetable() {
+  this.router.navigate(['viewtimetable']);
+}
 
 //addCourses(name, courses):
   

@@ -8,11 +8,12 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { HomeOnceAuthed } from './components/homeOnceAuthed/homeOnceAuthed.component';
 
 
+//canActivate: [AuthGuardService]
 const routes: Routes = [
   {path: 'home', component: HomeOnceAuthed},
   {path:'login', component: LoginComponent},
   {path:'search', component:SearchCoursesComponent},
-  {path:'maketimetable', component:MakeTimetable, canActivate: [AuthGuardService]},
+  {path:'maketimetable', component:MakeTimetable},
   {path:'viewtimetable', component:ViewTimetableComponent},
 ];
 
