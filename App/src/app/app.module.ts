@@ -20,6 +20,9 @@ import {SearchCoursesComponent} from './components/SearchCourses/search-courses.
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { LoginComponent } from './components/login/login.component';
+import {MatCardModule} from '@angular/material/card';
+
 
 
 @NgModule({
@@ -28,7 +31,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MakeTimetable,
     ViewTimetableComponent,
     AlertDialogComponent,
-    SearchCoursesComponent
+    SearchCoursesComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -47,9 +51,10 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatDialogModule,
     MatAutocompleteModule,
     MatSnackBarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatCardModule
   ],
-  exports:[MakeTimetable, ViewTimetableComponent,AlertDialogComponent, SearchCoursesComponent],
+  exports:[MakeTimetable, ViewTimetableComponent,AlertDialogComponent, SearchCoursesComponent, LoginComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

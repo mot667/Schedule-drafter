@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TutorialService} from './services/tutorial.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {Router} from "@angular/router";
+import { AuthService } from './services/auth.service';
 
 
 @Component({
@@ -11,16 +12,26 @@ import {Router} from "@angular/router";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'se3316-tkeech2-lab4';
+  title = 'se3316-tkeech2-lab5';
+  isAuthenticated: boolean;
 
   
   constructor(
-    private router: Router
-    ) {}
+    private router: Router,
+    public authService: AuthService
+    ) {
+      this.authService.isAuthenticated.subscribe(
+        (isAuthenticated: boolean)  => this.isAuthenticated = isAuthenticated
+      );
+    }
   
-  ngOnInit() {
+ async ngOnInit() {
+  this.isAuthenticated = await this.authService.checkAuthenticated();
+}
 
-  }
+logout() {
+  this.authService.logout('/');
+}
 
 
 
