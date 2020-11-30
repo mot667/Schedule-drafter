@@ -23,7 +23,13 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { LoginComponent } from './components/login/login.component';
 import { HomeOnceAuthed } from './components/homeOnceAuthed/homeOnceAuthed.component';
 import {MatCardModule} from '@angular/material/card';
-
+import { AuthModule } from '@auth0/auth0-angular';
+import { environment as env } from '../environments/environment';
+import { LoginButtonComponent } from './components/login-button/login-button.component';
+import { SignupButtonComponent } from './components/signup-button/signup-button.component';
+import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
+import { AuthenticationButtonComponent } from './components/authentication-button/authentication-button.component';
+import { AuthNavComponent } from './components/auth-nav/auth-nav.component';
 
 
 @NgModule({
@@ -34,7 +40,12 @@ import {MatCardModule} from '@angular/material/card';
     AlertDialogComponent,
     SearchCoursesComponent,
     LoginComponent,
-    HomeOnceAuthed
+    HomeOnceAuthed,
+    LoginButtonComponent,
+    SignupButtonComponent,
+    LogoutButtonComponent,
+    AuthenticationButtonComponent,
+    AuthNavComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +65,10 @@ import {MatCardModule} from '@angular/material/card';
     MatAutocompleteModule,
     MatSnackBarModule,
     MatTooltipModule,
-    MatCardModule
+    MatCardModule,
+    AuthModule.forRoot({
+      ...env.auth,
+    }),
   ],
   exports:[MakeTimetable, ViewTimetableComponent,AlertDialogComponent, SearchCoursesComponent, LoginComponent, HomeOnceAuthed],
   providers: [],
