@@ -1,12 +1,16 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {SearchCoursesComponent} from './components/SearchCourses/search-courses.component';
 import {MakeTimetable} from './components/MakeTimetable/make-timetable.component';
 import {ViewTimetableComponent} from './components/ViewTimetable/view-timetable.component'
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuardService } from './services/auth-guard.service';
+
 
 const routes: Routes = [
+  {path:'login', component: LoginComponent},
   {path:'search', component:SearchCoursesComponent},
-  {path:'maketimetable', component:MakeTimetable},
+  {path:'maketimetable', component:MakeTimetable, canActivate: [AuthGuardService]},
   {path:'viewtimetable', component:ViewTimetableComponent},
 ];
 
