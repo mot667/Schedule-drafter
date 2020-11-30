@@ -1,0 +1,63 @@
+<div>
+    <h2>Landing Page</h2>
+</div>
+
+<div class="content" role="main">
+    <form (ngSubmit) = "addCourse()" [formGroup]="addCourseFormGroup">
+      <mat-form-field>
+        <mat-label>Subject Code</mat-label>
+        <input (keydown.enter) = "addCourse()" matInput formControlName="subjectCode" placeholder="Enter a Subject Code"
+               required>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Course Code</mat-label>
+        <input (keydown.enter) = "addCourse()" matInput formControlName="courseCode" placeholder="Enter a Course Code"
+               required>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Course Component</mat-label>
+        <input (keydown.enter) = "addCourse()" matInput formControlName="courseComponent" placeholder="Enter a Course Component"
+               required>
+      </mat-form-field>
+  
+   
+  
+   
+  
+      <mat-accordion class="example-headers-align" multi>
+    
+      
+        <mat-expansion-panel *ngFor="let searchResult of searchResults; let i = index">
+          
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{searchResult.className}}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{searchResult.subject}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <table mat class="mat-elevation-z8">
+            <ng-container matColumnDef="Section">
+              <th mat-header-cell>class_nbr</th>
+              <td>{{searchResult.timetable.class_nbr}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Section">
+              <th mat-header-cell>Section</th>
+              <td>{{searchResult.timetable.class_section}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Component">
+              <th mat-header-cell>Component</th>
+              <td>{{searchResult.timetable.ssr_component}}</td>
+            </ng-container>
+  
+          </table>
+        </mat-expansion-panel>
+     
+      </mat-accordion> 
+  
+    </form>
+  </div>
+  
