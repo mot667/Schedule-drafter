@@ -21,6 +21,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { LoginComponent } from './components/login/login.component';
+import { HomeOnceAuthed } from './components/homeOnceAuthed/homeOnceAuthed.component';
 import {MatCardModule} from '@angular/material/card';
 
 
@@ -32,7 +33,8 @@ import {MatCardModule} from '@angular/material/card';
     ViewTimetableComponent,
     AlertDialogComponent,
     SearchCoursesComponent,
-    LoginComponent
+    LoginComponent,
+    HomeOnceAuthed
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,7 @@ import {MatCardModule} from '@angular/material/card';
     MatTooltipModule,
     MatCardModule
   ],
-  exports:[MakeTimetable, ViewTimetableComponent,AlertDialogComponent, SearchCoursesComponent, LoginComponent],
+  exports:[MakeTimetable, ViewTimetableComponent,AlertDialogComponent, SearchCoursesComponent, LoginComponent, HomeOnceAuthed],
   providers: [],
   bootstrap: [AppComponent]
 })
