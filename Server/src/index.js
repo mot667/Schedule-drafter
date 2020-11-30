@@ -111,7 +111,7 @@ if(req.autosan.body.subjectCode == '' && req.autosan.body.courseCode == '' && re
     timetableCollection.findOne({name:req.autosan.body.name})
        .then(result => {
            if(!result) {
-            timetableCollection.insertOne({name:req.autosan.body.name, courses:[]})
+            timetableCollection.insertOne({name:req.autosan.body.name, courses:[], isPublic: req.autosan.body.isPublic})
             .then(result2 => {
                 console.log("Posted");
                 res.send({succes:true})
