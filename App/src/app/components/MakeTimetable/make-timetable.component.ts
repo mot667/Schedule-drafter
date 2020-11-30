@@ -20,6 +20,8 @@ export class MakeTimetable implements OnInit {
   courses: any[] = [];
   displayedColumns: any[] = ['subject','className'];
   currentScheduleName: string;
+  color = 'primary';
+  isPublic = false;
 
   dataSource: any = new MatTableDataSource(this.selectedCourses);
 
@@ -46,7 +48,7 @@ export class MakeTimetable implements OnInit {
 addSchedule() {
   console.log(this.addScheduleFormGroup.value.scheduleName);
   this.currentScheduleName = this.addScheduleFormGroup.value.scheduleName;
-  this.tutorialService.createSchedule({name:this.addScheduleFormGroup.value.scheduleName})
+  this.tutorialService.createSchedule({name:this.addScheduleFormGroup.value.scheduleName, isPublic:this.isPublic})
   .subscribe(
     response => {
       console.log(response);
@@ -133,6 +135,12 @@ navigateToMakeTimetable() {
 
 navigateToViewTimetable() {
   this.router.navigate(['viewtimetable']);
+}
+
+
+changedPrivacy() {
+  this.isPublic = !this.isPublic;
+  console.log(this.isPublic);
 }
 
 //addCourses(name, courses):
