@@ -117,6 +117,7 @@ export class ViewTimetableComponent implements OnInit {
     localStorage.setItem('courses', JSON.stringify(selectedTimetable.courses));
     localStorage.setItem('isPublic', selectedTimetable.isPublic);
     localStorage.setItem('userEmail', selectedTimetable.userEmail);
+    localStorage.setItem('description',selectedTimetable.description);
     this.router.navigate(['edittimetable'])
   }
 

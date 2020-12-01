@@ -23,11 +23,9 @@ export class TutorialService {
   editSchedule(name): Observable<any> {
     localStorage.setItem("name",name.newName);
     localStorage.setItem("isPublic",name.isPublic);
+    localStorage.setItem("description", name.description);
     return this.http.post(`${baseUrl}/timetable/editTimeTable`,name);
   }
-
-
-
 
   getTimetables(data): Observable<any> {
     return this.http.post(`${baseUrl}/timetable`, data);

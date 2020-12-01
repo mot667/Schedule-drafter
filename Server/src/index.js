@@ -111,7 +111,7 @@ if(req.autosan.body.subjectCode == '' && req.autosan.body.courseCode == '' && re
     timetableCollection.findOne({name:req.autosan.body.name})
        .then(result => {
            if(!result) {
-            timetableCollection.insertOne({name:req.autosan.body.name, courses:[], isPublic: req.autosan.body.isPublic, userEmail: req.autosan.body.userEmail, timestamp: datetime})
+            timetableCollection.insertOne({name:req.autosan.body.name, description:req.autosan.body.description, courses:[], isPublic: req.autosan.body.isPublic, userEmail: req.autosan.body.userEmail, timestamp: datetime})
             .then(result2 => {
                 console.log("Posted");
                 res.send({succes:true})
@@ -145,7 +145,7 @@ if(req.autosan.body.subjectCode == '' && req.autosan.body.courseCode == '' && re
                 res.send({succes:false});
                }else {
                    timetableCollection.update({"name":req.autosan.body.name},
-                   {$set: {"name":req.autosan.body.newName,"isPublic":req.autosan.body.isPublic, timestamp: datetime}}
+                   {$set: {"name":req.autosan.body.newName,"description":req.autosan.body.description,"isPublic":req.autosan.body.isPublic, timestamp: datetime}}
                    )
                    .then(result2 => {
                        console.log("Updated");
