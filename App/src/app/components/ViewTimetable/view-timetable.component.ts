@@ -62,7 +62,7 @@ export class ViewTimetableComponent implements OnInit {
 
   onDelete() {
     //console.log(this.myControl.value);
-    this.tutorialService.deleteCourse({data:this.myControl.value})
+    this.tutorialService.deleteCourse({data:this.myControl.value, userEmail: localStorage.getItem('userEmail')})
     .subscribe(
       response => {
         console.log(response);
@@ -95,7 +95,7 @@ export class ViewTimetableComponent implements OnInit {
   }
 
   deleteAll() {
-    this.tutorialService.deleteAll()
+    this.tutorialService.deleteAll({userEmail:localStorage.getItem('userEmail')})
     .subscribe(
       response => {
         console.log(response);
