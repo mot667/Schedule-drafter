@@ -23,12 +23,14 @@ export class HomeOnceAuthed implements OnInit {
     ) {
     }
   
- ngOnInit(): void{
-    
-    this.auth.user$.subscribe(
-        (profile) => (this.profileJson = JSON.stringify(profile, null, 2))
-      );     
+ ngOnInit(){
+    this.auth.user$.subscribe(userProfile => {
+        this.profileJson = userProfile.email;
+        console.log(this.profileJson);
+        localStorage.setItem('userEmail',this.profileJson);
+    });
  } 
+
 
 
   navigateToTimetable() {

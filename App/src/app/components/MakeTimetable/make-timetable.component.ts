@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import { AlertDialogComponent } from '../alert-dialog/alert-dialog.component';
 import { MatDialog} from '@angular/material/dialog';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-add-tutorial',
@@ -22,6 +23,8 @@ export class MakeTimetable implements OnInit {
   currentScheduleName: string;
   color = 'primary';
   isPublic = false;
+  profileJson: string = null;
+  userEmail: string = null;
 
   dataSource: any = new MatTableDataSource(this.selectedCourses);
 
@@ -30,9 +33,10 @@ export class MakeTimetable implements OnInit {
     private tutorialService: TutorialService,
     private router: Router,
     private dialog: MatDialog,
+    public auth: AuthService,
     ) { }
 
-  ngOnInit(){
+  async ngOnInit(){
     this.addScheduleFormGroup = this._formBuilder.group({
       scheduleName: ['', Validators.required]
     });
@@ -40,15 +44,13 @@ export class MakeTimetable implements OnInit {
       subjectCode: ['', Validators.required],
       courseCode: ['', Validators.required],
       courseComponent: ['', Validators.required],
-
-
-
   });
+  this.userEmail = localStorage.getItem('userEmail')
 }
 addSchedule() {
   console.log(this.addScheduleFormGroup.value.scheduleName);
   this.currentScheduleName = this.addScheduleFormGroup.value.scheduleName;
-  this.tutorialService.createSchedule({name:this.addScheduleFormGroup.value.scheduleName, isPublic:this.isPublic})
+  this.tutorialService.createSchedule({name:this.addScheduleFormGroup.value.scheduleName, isPublic:this.isPublic, userEmail: this.userEmail})
   .subscribe(
     response => {
       console.log(response);
@@ -142,6 +144,7 @@ changedPrivacy() {
   this.isPublic = !this.isPublic;
   console.log(this.isPublic);
 }
+
 
 //addCourses(name, courses):
   
