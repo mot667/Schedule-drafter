@@ -87,6 +87,7 @@ export class ViewTimetableComponent implements OnInit {
     )
   }
 
+
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 2000,
@@ -107,6 +108,16 @@ export class ViewTimetableComponent implements OnInit {
         console.log(error);
       }
     )
+  }
+
+  onEdit(selectedTimetable) {
+    console.log(selectedTimetable);
+    localStorage.setItem('_id', selectedTimetable._id);
+    localStorage.setItem('name', selectedTimetable.name);
+    localStorage.setItem('courses', JSON.stringify(selectedTimetable.courses));
+    localStorage.setItem('isPublic', selectedTimetable.isPublic);
+    localStorage.setItem('userEmail', selectedTimetable.userEmail);
+    this.router.navigate(['edittimetable'])
   }
 
   
