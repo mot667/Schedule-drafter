@@ -33,6 +33,10 @@ export class TutorialService {
     return this.http.post(`${baseUrl}/timetable`, data);
   }
 
+  getPublicTimetables(): Observable<any> {
+    return this.http.get(`${baseUrl}/publictimetable`);
+  }
+
   addCourses(data): Observable<any> {
     return this.http.post(`${baseUrl}/timetable/addSchedule`, data);
   }

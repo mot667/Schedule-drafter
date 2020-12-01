@@ -6,6 +6,9 @@ import {Router} from "@angular/router";
 import { AuthService } from '@auth0/auth0-angular';
 import { AlertDialogComponent } from '../alert-dialog/alert-dialog.component';
 import { MatDialog} from '@angular/material/dialog';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 
 @Component({
@@ -21,6 +24,14 @@ export class LandingPage implements OnInit {
   addCourseFormGroup: FormGroup;
   searchResults: any;
   displayedColumns: string[] = ['Section'];
+
+  timetables: any[] = [];
+  displayedColumnsTimetables: string[] = ['Section', 'Component', 'Class Nbr', 'Days', 'Start Time', 'End Time', 'Location', 'Instructor', 'Requisites and Constraints', 'Status', 'Campus'];
+  dataSource: any = new MatTableDataSource(this.timetables);
+
+  myControl = new FormControl();
+  options: string[] = [];
+  filteredOptions: Observable<string[]>;
   
 
   
@@ -43,7 +54,36 @@ export class LandingPage implements OnInit {
         courseComponent: ['', Validators.required]
     });
 
+    this.tutorialService.getPublicTimetables()
+    .subscribe(
+      response => {
+        console.log(response)
+        this.timetables = response;
+
+        response.forEach(element => {
+          this.options.push(element.name);
+        });
+        this.filteredOptions = this.myControl.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => this._filter(value))
+        );
+
+
+      },
+      error => {
+        console.log(error);
+      }
+    )
+
+    
+
  } 
+ private _filter(value: string): string[] {
+  const filterValue = value.toLowerCase();
+
+  return this.options.filter(option => option.toLowerCase().includes(filterValue));
+}
 
  addCourse() {
     //console.log(this.addCourseFormGroup.value);
