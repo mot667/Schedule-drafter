@@ -130,6 +130,13 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             
         </table>
+        <button mat-raised-button
+        matTooltip="When clicked You can edit the Schedule"
+        class="editButton"
+        (click) = "onEdit(timetable)"
+      >
+        Edit
+      </button>
       </mat-card>
     </mat-expansion-panel>
  
