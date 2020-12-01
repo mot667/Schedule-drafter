@@ -32,6 +32,7 @@ import { AuthenticationButtonComponent } from './components/authentication-butto
 import { AuthNavComponent } from './components/auth-nav/auth-nav.component';
 import {LandingPage} from './components/landing-page/landing-page.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {EditTimetable} from './components/edit-timetable/edit-timetable.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     LogoutButtonComponent,
     AuthenticationButtonComponent,
     AuthNavComponent,
-    LandingPage
+    LandingPage,
+    EditTimetable
   ],
   imports: [
     BrowserModule,
@@ -74,7 +76,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
       ...env.auth,
     }),
   ],
-  exports:[MakeTimetable, ViewTimetableComponent,AlertDialogComponent, SearchCoursesComponent, LoginComponent, HomeOnceAuthed, LandingPage],
+  exports:[MakeTimetable, ViewTimetableComponent,AlertDialogComponent, SearchCoursesComponent, LoginComponent, HomeOnceAuthed, LandingPage, EditTimetable],
   providers: [],
   bootstrap: [AppComponent]
 })

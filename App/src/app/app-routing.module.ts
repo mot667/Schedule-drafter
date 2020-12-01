@@ -7,6 +7,8 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeOnceAuthed } from './components/homeOnceAuthed/homeOnceAuthed.component';
 import { AuthGuard } from '@auth0/auth0-angular';
 import {LandingPage} from './components/landing-page/landing-page.component';
+import {EditTimetable} from './components/edit-timetable/edit-timetable.component';
+
 
 //canActivate: [AuthGuardService]
 const routes: Routes = [
@@ -16,6 +18,7 @@ const routes: Routes = [
   {path:'search', component:SearchCoursesComponent},
   {path:'maketimetable', component:MakeTimetable},
   {path:'viewtimetable', component:ViewTimetableComponent},
+  {path: 'edittimetable', component:EditTimetable}
 ];
 
 @NgModule({

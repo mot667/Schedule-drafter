@@ -20,7 +20,11 @@ export class TutorialService {
     return this.http.post(`${baseUrl}/timetable/createTimeTable`,name);
   }
 
-
+  editSchedule(name): Observable<any> {
+    localStorage.setItem("name",name.newName);
+    localStorage.setItem("isPublic",name.isPublic);
+    return this.http.post(`${baseUrl}/timetable/editTimeTable`,name);
+  }
 
 
 
