@@ -107,11 +107,11 @@ if(req.autosan.body.subjectCode == '' && req.autosan.body.courseCode == '' && re
 });
 
     app.post('/api/timetable/createTimeTable',async (req, res) => {
-
+    let datetime = new Date();
     timetableCollection.findOne({name:req.autosan.body.name})
        .then(result => {
            if(!result) {
-            timetableCollection.insertOne({name:req.autosan.body.name, courses:[], isPublic: req.autosan.body.isPublic, userEmail: req.autosan.body.userEmail})
+            timetableCollection.insertOne({name:req.autosan.body.name, courses:[], isPublic: req.autosan.body.isPublic, userEmail: req.autosan.body.userEmail, timestamp: datetime})
             .then(result2 => {
                 console.log("Posted");
                 res.send({succes:true})
@@ -138,14 +138,14 @@ if(req.autosan.body.subjectCode == '' && req.autosan.body.courseCode == '' && re
 
 
     app.post('/api/timetable/editTimeTable',async (req, res) => {
-
+        let datetime = new Date();
         timetableCollection.findOne({name:req.autosan.body.name})
            .then(result => {
                if(!result) {
                 res.send({succes:false});
                }else {
                    timetableCollection.update({"name":req.autosan.body.name},
-                   {$set: {"name":req.autosan.body.newName,"isPublic":req.autosan.body.isPublic}}
+                   {$set: {"name":req.autosan.body.newName,"isPublic":req.autosan.body.isPublic, timestamp: datetime}}
                    )
                    .then(result2 => {
                        console.log("Updated");
@@ -164,7 +164,7 @@ if(req.autosan.body.subjectCode == '' && req.autosan.body.courseCode == '' && re
 
     app.post('/api/timetable/deleteTimeTable',async (req, res) => {
 
-        timetableCollection.deleteOne({name: req.autosan.body.data})
+        timetableCollection.deleteOne({name: req.autosan.body.data, userEmail: req.autosan.body.userEmail})
         .then(result => {
             if(result.result.n != 0){
             //res.redirect('/timetable');
@@ -234,6 +234,7 @@ if(req.autosan.body.subjectCode == '' && req.autosan.body.courseCode == '' && re
 
 
 app.post('/api/timetable/addSchedule',(req,res) => {
+    let datetime = new Date();
 
     let newCourses = req.autosan.body.courses;
     //console.log(req.autosan.body.name)
@@ -273,8 +274,8 @@ app.post('/api/timetable/addSchedule',(req,res) => {
             }
         })
     
-            timetableCollection.updateOne({_id: timetable._id}, {
-                $set: {courses: courses}
+            timetableCollection.updateMany({_id: timetable._id}, {
+                $set: {courses: courses, timestamp: datetime}
             }, saveErr => {
                 if (!saveErr) {
                     res.send('yes');
@@ -296,11 +297,15 @@ app.post('/api/timetable/addSchedule',(req,res) => {
 
 
 
-app.delete('/api/timetable/deleteAll',(req,res) => {
-    timetableCollection.deleteMany({}, function(err,response) {
+app.post('/api/timetable/deleteAll',(req,res) => {
+    console.log(req.autosan.body.userEmail);
+
+    timetableCollection.deleteMany({userEmail:req.autosan.body.userEmail}, function(err,response) {
         if (err) throw err;
         res.send({success:true})
     })
+
+    
 })
 
 
