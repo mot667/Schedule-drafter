@@ -65,12 +65,15 @@
       <mat-accordion class="example-headers-align" multi>
             
               
-        <mat-expansion-panel *ngFor="let timetable of timetables">
+        <mat-expansion-panel *ngFor="let timetable of timetables | slice:0:10">
           
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{timetable.name}}
             </mat-panel-title>
+            <mat-panel-description>
+              {{"Created by " + timetable.userEmail}}
+            </mat-panel-description>
             <mat-panel-description>
               {{timetable.courses.length + " courses"}}
             </mat-panel-description>
