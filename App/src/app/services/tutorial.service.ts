@@ -41,7 +41,7 @@ export class TutorialService {
     return this.http.post(`${baseUrl}/timetable/deleteTimeTable`, data);
   }
 
-  deleteAll(): Observable<any> {
-    return this.http.delete(`${baseUrl}/timetable/deleteALL`);
+  deleteAll(data): Observable<any> {
+    return this.http.post(`${baseUrl}/timetable/deleteALL`, data);
   }
 }
