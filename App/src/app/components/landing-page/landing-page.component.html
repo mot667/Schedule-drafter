@@ -59,5 +59,95 @@
       </mat-accordion> 
   
     </form>
+
+    <div>
+      <h2>Public Courses</h2>
+      <mat-accordion class="example-headers-align" multi>
+            
+              
+        <mat-expansion-panel *ngFor="let timetable of timetables">
+          
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{timetable.name}}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{timetable.courses.length + " courses"}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+    
+          <mat-card>
+            <table mat-table [dataSource] = "timetable.courses" class="mat-elevation-z8">
+    
+                <ng-container matColumnDef="Section">
+                  <th mat-header-cell *matHeaderCellDef>Section</th>
+                  <td mat-cell *matCellDef="let element; let number = index">{{timetable.courses[number].allInformation.class_section}}</td>
+                </ng-container>
+    
+                <ng-container matColumnDef="Component">
+                  <th mat-header-cell *matHeaderCellDef>Component</th>
+                  <td mat-cell *matCellDef="let element; let number = index" >{{timetable.courses[number].allInformation.ssr_component}}</td>
+                </ng-container>
+    
+                <ng-container matColumnDef="Class Nbr">
+                  <th mat-header-cell *matHeaderCellDef>Class Nbr</th>
+                  <td mat-cell *matCellDef="let element; let number = index">{{timetable.courses[number].allInformation.class_nbr}}</td>
+                </ng-container>
+    
+                <ng-container matColumnDef="Days">
+                  <th mat-header-cell *matHeaderCellDef>Days</th>
+                  <td mat-cell *matCellDef="let element; let number = index">{{timetable.courses[number].allInformation.days}}</td>
+                </ng-container>
+    
+                <ng-container matColumnDef="Start Time">
+                  <th mat-header-cell *matHeaderCellDef>Start Time</th>
+                  <td mat-cell *matCellDef="let element; let number = index">{{timetable.courses[number].allInformation.start_time}}</td>
+                </ng-container>
+    
+                <ng-container matColumnDef="End Time">
+                  <th mat-header-cell *matHeaderCellDef>End Time</th>
+                  <td mat-cell *matCellDef="let element; let number = index">{{timetable.courses[number].allInformation.end_time}}</td>
+                </ng-container>
+    
+                <ng-container matColumnDef="Location">
+                  <th mat-header-cell *matHeaderCellDef>Location</th>
+                  <td mat-cell *matCellDef="let element; let number = index">{{timetable.courses[number].allInformation.facility_ID}}</td>
+                </ng-container>
+    
+                <ng-container matColumnDef="Instructor">
+                  <th mat-header-cell *matHeaderCellDef>Instructor</th>
+                  <td mat-cell *matCellDef="let element; let number = index">{{timetable.courses[number].allInformation.Instructors}}</td>
+                </ng-container>
+    
+                <ng-container matColumnDef="Requisites and Constraints">
+                  <th mat-header-cell *matHeaderCellDef>Requisites and Constraints</th>
+                  <td mat-cell *matCellDef="let element; let number = index">{{timetable.courses[number].allInformation.descr}}</td>
+                </ng-container>
+    
+                <ng-container matColumnDef="Status">
+                  <th mat-header-cell *matHeaderCellDef>Status</th>
+                  <td mat-cell *matCellDef="let element; let number = index">{{timetable.courses[number].allInformation.enrl_stat}}</td>
+                </ng-container>
+    
+                <ng-container matColumnDef="Campus">
+                  <th mat-header-cell *matHeaderCellDef>Campus</th>
+                  <td mat-cell *matCellDef="let element; let number = index">{{timetable.courses[number].allInformation.campus}}</td>
+                </ng-container>
+    
+                
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsTimetables"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsTimetables;"></tr>
+                
+            </table>
+          </mat-card>
+        </mat-expansion-panel>
+     
+    
+    
+      </mat-accordion>
+      
+    </div>
+
   </div>
+  
   

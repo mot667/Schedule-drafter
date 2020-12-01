@@ -190,6 +190,18 @@ if(req.autosan.body.subjectCode == '' && req.autosan.body.courseCode == '' && re
       // ...
     });
 
+    app.get('/api/publictimetable', (req,res) => {
+        //console.log("Hello: " + req.autosan.body.userEmail)
+        var data;
+        db.collection('tables').find({isPublic: true}).sort({"timestamp":-1}).toArray()
+        .then(results => {
+        res.json(results);
+        //  res.redirect('/timetable');
+        })
+        .catch(error => console.error(error))
+    // ...  
+    })
+
     app.post("/api/courses/addCourses", (req, res) => {
     if(req.autosan.body.subjectCode != '' && req.autosan.body.courseCode == '' && req.autosan.body.courseComponent == ''){
         let result = [];
