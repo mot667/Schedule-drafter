@@ -136,6 +136,32 @@ if(req.autosan.body.subjectCode == '' && req.autosan.body.courseCode == '' && re
         */
     });
 
+
+    app.post('/api/timetable/editTimeTable',async (req, res) => {
+
+        timetableCollection.findOne({name:req.autosan.body.name})
+           .then(result => {
+               if(!result) {
+                res.send({succes:false});
+               }else {
+                   timetableCollection.update({"name":req.autosan.body.name},
+                   {$set: {"name":req.autosan.body.newName,"isPublic":req.autosan.body.isPublic}}
+                   )
+                   .then(result2 => {
+                       console.log("Updated");
+                       res.send({succes:true})
+                   })
+                   .catch(error => console.error(error))
+               }
+           })
+           .catch(error => console.log(error));
+           
+        });
+
+
+
+
+
     app.post('/api/timetable/deleteTimeTable',async (req, res) => {
 
         timetableCollection.deleteOne({name: req.autosan.body.data})
@@ -211,6 +237,23 @@ app.post('/api/timetable/addSchedule',(req,res) => {
 
     let newCourses = req.autosan.body.courses;
     //console.log(req.autosan.body.name)
+
+    if(newCourses[0] == 'delete' && newCourses.length == 0) {
+        console.log("delete");
+    } else{
+        if(newCourses[0] == 'delete') {
+            console.log("delete")
+            newCourses.shift();
+
+            timetableCollection.updateOne({name:req.autosan.body.name}, {
+                $set: {courses: []}
+            }, saveErr => {
+                console.log(saveErr)
+            });
+        }
+    
+
+
     
  
         timetableCollection.findOne({
@@ -240,7 +283,7 @@ app.post('/api/timetable/addSchedule',(req,res) => {
             });
           });
         
-    
+        }
     
 
 });
