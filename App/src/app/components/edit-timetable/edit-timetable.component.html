@@ -11,6 +11,12 @@
               <input matInput placeholder="Name of the new Schedule" formControlName="scheduleName" required>
             </mat-form-field>
             <div>
+              <mat-form-field class="example-full-width">
+                <mat-label>{{currentDescription}}</mat-label>
+                <textarea formControlName="scheduleDescription" matInput placeholder="Ex. My sample schedule for first year engineering..."></textarea>
+              </mat-form-field>
+            </div>
+            <div>
               <mat-slide-toggle [checked] = "isPublic" [color]="color" (change)="changedPrivacy()">Make Public</mat-slide-toggle>
             </div>
             <div>

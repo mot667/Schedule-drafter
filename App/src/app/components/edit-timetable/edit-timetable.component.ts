@@ -20,7 +20,8 @@ export class EditTimetable implements OnInit {
   selectedCourses: any[] = ["delete"];
   courses: any[] = JSON.parse(localStorage.getItem('courses'));
   displayedColumns: any[] = ['subject','className'];
-  currentScheduleName: string = localStorage.getItem('name');;
+  currentScheduleName: string = localStorage.getItem('name');
+  currentDescription: string = localStorage.getItem('description');
   color = 'primary';
   isPublic = localStorage.getItem('isPublic') == 'true' ;
   profileJson: string = null;
@@ -39,7 +40,8 @@ export class EditTimetable implements OnInit {
 
   async ngOnInit(){
     this.addScheduleFormGroup = this._formBuilder.group({
-      scheduleName: ['', Validators.required]
+      scheduleName: ['', Validators.required],
+      scheduleDescription: ['']
     });
     this.addCourseFormGroup = this._formBuilder.group({
       subjectCode: ['', Validators.required],
@@ -50,9 +52,19 @@ export class EditTimetable implements OnInit {
   
 }
 addSchedule() {
-  console.log(this.addScheduleFormGroup.value.scheduleName);
+  var newName = this.addScheduleFormGroup.value.scheduleName;
+  var newDescription = this.addScheduleFormGroup.value.scheduleDescription;
+
+
   this.currentScheduleName = this.addScheduleFormGroup.value.scheduleName;
-  this.tutorialService.editSchedule({name:localStorage.getItem('name'), isPublic:this.isPublic, userEmail: this.userEmail, newName:this.addScheduleFormGroup.value.scheduleName})
+  if(newName == ""){
+    newName = localStorage.getItem('name');
+  }
+
+  if(newDescription == ""){
+    newDescription = localStorage.getItem('description');
+  }
+  this.tutorialService.editSchedule({name:localStorage.getItem('name'), description:newDescription, isPublic:this.isPublic, userEmail: this.userEmail, newName:newName})
   .subscribe(
     response => {
       console.log(response);

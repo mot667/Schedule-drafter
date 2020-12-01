@@ -38,7 +38,8 @@ export class MakeTimetable implements OnInit {
 
   async ngOnInit(){
     this.addScheduleFormGroup = this._formBuilder.group({
-      scheduleName: ['', Validators.required]
+      scheduleName: ['', Validators.required],
+      scheduleDescription:['']
     });
     this.addCourseFormGroup = this._formBuilder.group({
       subjectCode: ['', Validators.required],
@@ -48,9 +49,11 @@ export class MakeTimetable implements OnInit {
   this.userEmail = localStorage.getItem('userEmail')
 }
 addSchedule() {
-  console.log(this.addScheduleFormGroup.value.scheduleName);
+  //console.log(this.addScheduleFormGroup.value.scheduleName);
+  //console.log(this.addScheduleFormGroup.value.scheduleDescription);
+  
   this.currentScheduleName = this.addScheduleFormGroup.value.scheduleName;
-  this.tutorialService.createSchedule({name:this.addScheduleFormGroup.value.scheduleName, isPublic:this.isPublic, userEmail: this.userEmail})
+  this.tutorialService.createSchedule({name:this.addScheduleFormGroup.value.scheduleName, isPublic:this.isPublic, description:this.addScheduleFormGroup.value.scheduleDescription, userEmail: this.userEmail})
   .subscribe(
     response => {
       console.log(response);
