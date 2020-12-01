@@ -30,7 +30,8 @@ export class ViewTimetableComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.tutorialService.getTimetables()
+    var userEmail = localStorage.getItem('userEmail');
+    this.tutorialService.getTimetables({userEmail: userEmail})
     .subscribe(
       response => {
         this.timetables = response;

@@ -152,9 +152,10 @@ if(req.autosan.body.subjectCode == '' && req.autosan.body.courseCode == '' && re
 
     });
 
-    app.get('/api/timetable', (req, res) => {
+    app.post('/api/timetable', (req, res) => {
+        //console.log("Hello: " + req.autosan.body.userEmail)
         var data;
-        db.collection('tables').find().toArray()
+        db.collection('tables').find({userEmail:req.autosan.body.userEmail}).toArray()
         .then(results => {
         res.json(results);
         //  res.redirect('/timetable');
