@@ -25,8 +25,8 @@ export class TutorialService {
 
 
 
-  getTimetables(): Observable<any> {
-    return this.http.get(`${baseUrl}/timetable`);
+  getTimetables(data): Observable<any> {
+    return this.http.post(`${baseUrl}/timetable`, data);
   }
 
   addCourses(data): Observable<any> {
