@@ -24,9 +24,12 @@ export class HomeOnceAuthed implements OnInit {
     }
   
  ngOnInit(){
+
+  //console.log(this.auth.getAccessTokenSilently())
     this.auth.user$.subscribe(userProfile => {
         this.profileJson = userProfile.email;
         console.log(this.profileJson);
+        console.log(userProfile);
         localStorage.setItem('userEmail',this.profileJson);
     });
  } 

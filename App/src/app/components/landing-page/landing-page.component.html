@@ -59,6 +59,29 @@
   
     </form>
 
+
+
+
+
+  <div class="keyword">
+    <form (ngSubmit) = "searchKeyword()" [formGroup]="searchKeywordFormGroup">
+      <mat-form-field>
+        <mat-label>Search by keyword</mat-label>
+        <input matInput formControlName="keywordInput" placeholder="Enter a keyword"
+               required>
+      </mat-form-field>
+    </form>
+  </div>
+  <mat-card>
+    {{bestMatchClassName}}
+    {{bestMatchSubjectCode}}
+  </mat-card>
+
+
+
+
+
+
     <div>
       <h2>Public Courses</h2>
       <mat-accordion class="example-headers-align" multi>

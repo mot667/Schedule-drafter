@@ -22,6 +22,7 @@ export class LandingPage implements OnInit {
   profileJson: string = null;
   addScheduleFormGroup: FormGroup;
   addCourseFormGroup: FormGroup;
+  searchKeywordFormGroup: FormGroup;
   searchResults: any;
   displayedColumns: string[] = ['Section'];
 
@@ -32,6 +33,10 @@ export class LandingPage implements OnInit {
   myControl = new FormControl();
   options: string[] = [];
   filteredOptions: Observable<string[]>;
+  bestMatch: string = null;
+  bestMatchClassName: string = null;
+  bestMatchSubjectCode: string = null;
+
   
 
   
@@ -53,6 +58,11 @@ export class LandingPage implements OnInit {
         courseCode: ['', Validators.required],
         courseComponent: ['', Validators.required]
     });
+
+    this.searchKeywordFormGroup = this._formBuilder.group({
+      keywordInput: ['', Validators.required]
+  });
+
 
     this.tutorialService.getPublicTimetables()
     .subscribe(
@@ -109,6 +119,24 @@ export class LandingPage implements OnInit {
         console.log(error);
       }
     )
+  }
+
+  searchKeyword() {
+    //console.log(this.searchKeywordFormGroup.value.keywordInput);
+
+    this.tutorialService.searchKeyword({input: this.searchKeywordFormGroup.value.keywordInput})
+    .subscribe(
+      response => {
+        this.bestMatch = response.bestMatch;
+        this.bestMatchClassName = response.bestMatch.className;
+        this.bestMatchSubjectCode = response.bestMatch.subjectCode;
+        
+      },
+      error => {
+        console.log(error);
+      }
+    )
+
   }
 
 
