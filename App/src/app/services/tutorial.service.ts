@@ -55,5 +55,9 @@ export class TutorialService {
     return this.http.post(`${baseUrl}/searchkeyword`, data);
   }
 
+  checkIfAdmin(data): Observable<any> {
+    return this.http.post(`${baseUrl}/checkifadmin`, data);
+  }
+
 
 }
