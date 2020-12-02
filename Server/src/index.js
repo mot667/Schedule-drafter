@@ -16,6 +16,7 @@ dotenv.config();
 var db = "";
 var timetableCollection = "";
 var reviewCollection = "";
+var adminCollection = "";
 
 
 var courses = [];
@@ -52,6 +53,7 @@ for (var key = 0; key < timetable.length; key++) {
     db = client.db('Timetables')
     timetableCollection = db.collection('tables')
     reviewCollection = db.collection('reviews')
+    adminCollection = db.collection('admins')
   })
   .catch(error => console.error(error))
 
@@ -355,7 +357,17 @@ app.post('/api/searchkeyword', async (req,res) => {
 
 
     
+app.post('/api/checkifadmin',(req,res) => {
+    console.log(req.autosan.body.userID);
+    console.log("hllo")
+
+    adminCollection.findOne({userID: req.autosan.body.userID}, function(err, result) {
+        if (err) throw err;
+        res.send(result);
+      });
+
     
+})
 
     
 
