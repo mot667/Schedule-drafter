@@ -139,6 +139,10 @@ export class LandingPage implements OnInit {
 
   }
 
+  navigateToHomeOnceAuthed() {
+    this.router.navigate(['home']);
+  }
+
 
 
   /*

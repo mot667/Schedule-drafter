@@ -8,6 +8,7 @@ import { HomeOnceAuthed } from './components/homeOnceAuthed/homeOnceAuthed.compo
 import { AuthGuard } from '@auth0/auth0-angular';
 import {LandingPage} from './components/landing-page/landing-page.component';
 import {EditTimetable} from './components/edit-timetable/edit-timetable.component';
+import {ViewReviews} from './components/view-reviews/view-reviews.component';
 
 
 //canActivate: [AuthGuardService]
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path:'search', component:SearchCoursesComponent},
   {path:'maketimetable', component:MakeTimetable},
   {path:'viewtimetable', component:ViewTimetableComponent},
-  {path: 'edittimetable', component:EditTimetable}
+  {path: 'edittimetable', component:EditTimetable},
+  {path:'viewreviews', component: ViewReviews}
 ];
 
 @NgModule({
