@@ -78,6 +78,13 @@
           </ng-container>
 
         </table>
+        <button mat-raised-button
+        matTooltip="Click to review course"
+        class="reviewButton"
+        (click) = "onReview(searchResult)"
+      >
+        Review
+      </button>
       </mat-expansion-panel>
    
     </mat-accordion> 
