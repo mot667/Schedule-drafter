@@ -34,6 +34,8 @@ import {LandingPage} from './components/landing-page/landing-page.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {EditTimetable} from './components/edit-timetable/edit-timetable.component';
 import {ReviewDialogComponent} from './components/review-dialog/review-dialog.component';
+import {ViewReviews} from './components/view-reviews/view-reviews.component';
+
 
 
 @NgModule({
@@ -52,7 +54,8 @@ import {ReviewDialogComponent} from './components/review-dialog/review-dialog.co
     AuthNavComponent,
     LandingPage,
     EditTimetable,
-    ReviewDialogComponent
+    ReviewDialogComponent,
+    ViewReviews
 
   ],
   imports: [
@@ -79,7 +82,7 @@ import {ReviewDialogComponent} from './components/review-dialog/review-dialog.co
       ...env.auth,
     }),
   ],
-  exports:[MakeTimetable, ViewTimetableComponent,AlertDialogComponent, SearchCoursesComponent, LoginComponent, HomeOnceAuthed, LandingPage, EditTimetable, ReviewDialogComponent],
+  exports:[MakeTimetable, ViewTimetableComponent,AlertDialogComponent, SearchCoursesComponent, LoginComponent, HomeOnceAuthed, LandingPage, EditTimetable, ReviewDialogComponent, ViewReviews],
   providers: [],
   bootstrap: [AppComponent]
 })

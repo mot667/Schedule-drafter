@@ -66,6 +66,10 @@ export class HomeOnceAuthed implements OnInit {
     this.router.navigate(['viewtimetable']);
   }
 
+  navigateToViewReviews() {
+    this.router.navigate(['viewreviews']);
+  }
+
   /*
   navigateToTimetables() {
     this.tutorialService.navigateToTimetables()
