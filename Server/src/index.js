@@ -14,6 +14,7 @@ dotenv.config();
 
 var db = "";
 var timetableCollection = "";
+var reviewCollection = "";
 
 
 var courses = [];
@@ -46,6 +47,7 @@ for (var key = 0; key < timetable.length; key++) {
     console.log('Connected to Database')
     db = client.db('Timetables')
     timetableCollection = db.collection('tables')
+    reviewCollection = db.collection('reviews')
   })
   .catch(error => console.error(error))
 
@@ -299,6 +301,24 @@ app.post('/api/timetable/addSchedule',(req,res) => {
         }
     
 
+});
+
+
+
+app.post('/api/postreview',async (req, res) => {
+    let datetime = new Date();
+//review
+//course
+
+        
+    reviewCollection.insertOne({"review": req.autosan.body.review,"className": req.autosan.body.className,"subject":req.autosan.body.course.subject, "timestamp": datetime })
+        .then(result2 => {
+            console.log("Posted");
+            res.send({succes:true})
+            })
+        .catch(error => console.error(error))
+           
+           
 });
 
 

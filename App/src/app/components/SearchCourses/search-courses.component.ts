@@ -5,6 +5,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Router} from "@angular/router";
 import { AlertDialogComponent } from '../alert-dialog/alert-dialog.component';
 import { MatDialog} from '@angular/material/dialog';
+import {ReviewDialogComponent} from '../review-dialog/review-dialog.component';
+
 
 
 @Component({
@@ -41,6 +43,7 @@ export class SearchCoursesComponent implements OnInit {
 
 
   });
+
 }
 
 addCourse() {
@@ -81,7 +84,12 @@ navigateToViewTimetable() {
   this.router.navigate(['viewtimetable']);
 }
 
-
-
+onReview(timetable) {
+  localStorage.setItem("reviewCourse",JSON.stringify(timetable));
+  const dialogRef = this.dialog.open(ReviewDialogComponent,{
+  });
+  
+  
+}
 
 }

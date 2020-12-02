@@ -33,6 +33,7 @@ import { AuthNavComponent } from './components/auth-nav/auth-nav.component';
 import {LandingPage} from './components/landing-page/landing-page.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {EditTimetable} from './components/edit-timetable/edit-timetable.component';
+import {ReviewDialogComponent} from './components/review-dialog/review-dialog.component';
 
 
 @NgModule({
@@ -50,7 +51,9 @@ import {EditTimetable} from './components/edit-timetable/edit-timetable.componen
     AuthenticationButtonComponent,
     AuthNavComponent,
     LandingPage,
-    EditTimetable
+    EditTimetable,
+    ReviewDialogComponent
+
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,7 @@ import {EditTimetable} from './components/edit-timetable/edit-timetable.componen
       ...env.auth,
     }),
   ],
-  exports:[MakeTimetable, ViewTimetableComponent,AlertDialogComponent, SearchCoursesComponent, LoginComponent, HomeOnceAuthed, LandingPage, EditTimetable],
+  exports:[MakeTimetable, ViewTimetableComponent,AlertDialogComponent, SearchCoursesComponent, LoginComponent, HomeOnceAuthed, LandingPage, EditTimetable, ReviewDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

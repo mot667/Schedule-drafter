@@ -29,8 +29,7 @@
       <mat-accordion class="example-headers-align" multi>
     
       
-        <mat-expansion-panel *ngFor="let searchResult of searchResults; let i = index">
-          
+        <mat-expansion-panel *ngFor="let searchResult of searchResults; let i = index">        
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{searchResult.className}}
@@ -66,7 +65,7 @@
             
               
         <mat-expansion-panel *ngFor="let timetable of timetables | slice:0:10">
-          
+          <h3>{{timetable.description}}</h3>
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{timetable.name}}

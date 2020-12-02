@@ -1,0 +1,14 @@
+<mat-dialog-content>
+    Review of {{message}}
+</mat-dialog-content>
+<form (ngSubmit) = "onConfirmClick()" [formGroup]="addReviewFormGroup">
+<mat-form-field class="example-full-width">
+    <mat-label>Leave a Review</mat-label>
+    <textarea formControlName="review" matInput placeholder="Ex. It makes me feel..."></textarea>
+  </mat-form-field>
+  <div>
+  <button type="submit" mat-raised-button color="primary">Post</button>
+ </div>
+</form>
+
+
