@@ -369,6 +369,17 @@ app.post('/api/checkifadmin',(req,res) => {
     
 })
 
+app.post('/api/getreview',(req,res) => {
+
+    db.collection('reviews').find({}).toArray()
+    .then(results => {
+    res.json(results);
+    //  res.redirect('/timetable');
+    })
+    .catch(error => console.error(error))
+    
+})
+
     
 
 
