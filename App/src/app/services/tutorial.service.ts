@@ -51,5 +51,9 @@ export class TutorialService {
     return this.http.post(`${baseUrl}/postreview`, data);
   }
 
+  searchKeyword(data): Observable<any> {
+    return this.http.post(`${baseUrl}/searchkeyword`, data);
+  }
+
 
 }

@@ -5,6 +5,7 @@ const app = express();
 const dotenv = require("dotenv");
 const MongoClient = require('mongodb').MongoClient
 var path = require('path');
+var stringSimilarity = require('string-similarity');
 const bodyParser = require('body-parser');
 var timetable = require('../CourseInformation.json');
 const { response } = require("express");
@@ -18,6 +19,7 @@ var reviewCollection = "";
 
 
 var courses = [];
+var catalogAndClass = [];
 
 app.use(cors());
 app.use(express.static('client'));
@@ -37,7 +39,9 @@ for (var key = 0; key < timetable.length; key++) {
             className: item.className,
             timetable: item.course_info[0],
             component: item.course_info[0].ssr_component
-        });            
+        }); 
+        catalogAndClass.push(item.catalog_nbr.toString());  
+        catalogAndClass.push(item.className.toString());        
     }
 }
 
@@ -321,6 +325,34 @@ app.post('/api/postreview',async (req, res) => {
            
 });
 
+app.post('/api/searchkeyword', async (req,res) => {
+    var input = req.autosan.body.input;
+    try{
+    //var matches = await stringSimilarity.findBestMatch(input, catalogAndClass.slice(0,30));
+    var bestMatch = stringSimilarity.compareTwoStrings(input,catalogAndClass[0]);
+    var index = 0;
+    //console.log(bestMatch);
+    
+    for(var x = 1; x < catalogAndClass.length; x++) {
+        currentScore = stringSimilarity.compareTwoStrings(input,catalogAndClass[x]);
+        if(currentScore > bestMatch) {
+            bestMatch = currentScore
+            index = x;
+            if(bestMatch == 1) {
+                console.log("PErfect match");
+                //res.send(catalogAndClass[index])
+                break;
+            }
+        }
+    }
+
+    
+    res.send({bestMatch:courses[Math.floor(index/2)]});
+    }catch(error) {
+        res.send(error);
+    }
+});
+
 
     
     
@@ -330,7 +362,7 @@ app.post('/api/postreview',async (req, res) => {
 
 
 app.post('/api/timetable/deleteAll',(req,res) => {
-    console.log(req.autosan.body.userEmail);
+    //console.log(req.autosan.body.userEmail);
 
     timetableCollection.deleteMany({userEmail:req.autosan.body.userEmail}, function(err,response) {
         if (err) throw err;
