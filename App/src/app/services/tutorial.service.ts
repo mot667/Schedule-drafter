@@ -67,5 +67,13 @@ export class TutorialService {
     return this.http.post(`${baseUrl}/changereviewstatus`, data);
   }
 
+  addUser(data): Observable<any> {
+    return this.http.post(`${baseUrl}/adduser`, data);
+  }
+
+  getAllUsers(data): Observable<any> {
+    return this.http.post(`${baseUrl}/getAllUsers`, data);
+  }
+
 
 }

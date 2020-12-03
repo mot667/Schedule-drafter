@@ -18,11 +18,11 @@ const routes: Routes = [
   {path: '', component: LandingPage},
   {path: 'home', component: HomeOnceAuthed, canActivate: [AuthGuard]},
   {path:'login', component: LoginComponent},
-  {path:'search', component:SearchCoursesComponent},
-  {path:'maketimetable', component:MakeTimetable},
-  {path:'viewtimetable', component:ViewTimetableComponent},
-  {path: 'edittimetable', component:EditTimetable},
-  {path:'viewreviews', component: ViewReviews},
+  {path:'search', component:SearchCoursesComponent,canActivate: [AuthGuard]},
+  {path:'maketimetable', component:MakeTimetable,canActivate: [AuthGuard]},
+  {path:'viewtimetable', component:ViewTimetableComponent,canActivate: [AuthGuard]},
+  {path: 'edittimetable', component:EditTimetable,canActivate: [AuthGuard]},
+  {path:'viewreviews', component: ViewReviews,canActivate: [AuthGuard]},
 ];
 
 @NgModule({
