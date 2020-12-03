@@ -100,6 +100,18 @@ export class HomeOnceAuthed implements OnInit {
     this.router.navigate(['']);
   }
 
+  makeAdmin(userID) {
+    this.tutorialService.makeAdmin({userID: userID})
+    .subscribe(
+      response => {
+        console.log(response)   
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
   /*
   navigateToTimetables() {
     this.tutorialService.navigateToTimetables()

@@ -466,6 +466,17 @@ app.post('/api/getallUsers',(req,res) => {
     .catch(error => console.error(error))
 })
 
+app.post('/api/makeAdmin',(req,res) => {
+    console.log(req.autosan.body.userID)
+    adminCollection.updateOne({"userID":req.autosan.body.userID},
+    {$set: {"role":'admin'}}
+)
+    .then(result2 => {
+    res.send(result2)
+    })
+    .catch(error => console.error(error))
+})
+
 
 
 app.get('/',(req, res) => {
