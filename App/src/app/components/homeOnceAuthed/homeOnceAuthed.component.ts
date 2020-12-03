@@ -18,6 +18,7 @@ export class HomeOnceAuthed implements OnInit {
   userID = '';
   allUsers = [] = [];
   displayAdminStuff: boolean = false;
+  adminUser = "User";
   
   constructor(
     private router: Router,
@@ -61,6 +62,7 @@ export class HomeOnceAuthed implements OnInit {
             console.log(response)
             if(response != null) {
               this.displayAdminStuff = true;
+              this.adminUser = "Admin"
             }    
           },
           error => {
