@@ -376,7 +376,7 @@ app.post('/api/checkifadmin',(req,res) => {
     console.log(req.autosan.body.userID);
     console.log("hllo")
 
-    adminCollection.findOne({userID: req.autosan.body.userID}, function(err, result) {
+    adminCollection.findOne({userID: req.autosan.body.userID,role:'admin'}, function(err, result) {
         if (err) throw err;
         res.send(result);
       });
@@ -427,6 +427,43 @@ reviewCollection.updateOne({"_id":ObjectID(req.autosan.body.reviewID)},
     res.send(result2)
 })
 .catch(error => console.error(error))
+})
+
+
+
+
+
+
+
+
+
+app.post('/api/adduser',(req,res) => {
+
+    adminCollection.findOne({userID:req.autosan.body.userID})
+    .then(result => {
+        if(!result) {
+         adminCollection.insertOne({userID:req.autosan.body.userID, role:'user'})
+         .then(result2 => {
+             console.log("Posted");
+             res.send({succes:true})
+         })
+         .catch(error => console.error(error))
+        }else {
+            res.send({succes:false});
+        }
+    })
+    .catch(error => console.log(error));
+
+})
+
+
+app.post('/api/getallUsers',(req,res) => {
+    adminCollection.find({role:'user'}).toArray()
+    .then(results => {
+    res.json(results);
+    //  res.redirect('/timetable');
+    })
+    .catch(error => console.error(error))
 })
 
 
