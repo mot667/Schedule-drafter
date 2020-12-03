@@ -60,6 +60,14 @@
     >
       Make Admin
     </button>
+    <button mat-raised-button
+    matTooltip="When clicked You can emake admin"
+    class="makeAdminButton"
+    (click) = "changeActive(user.userID, user.active)"
+  >
+    Toggle Activity
+  </button>
+  Active: {{user.active}}
     </mat-card>
     </ng-container>
 </div>

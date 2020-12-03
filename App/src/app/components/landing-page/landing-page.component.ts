@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component,Inject, OnInit, Input } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TutorialService} from '../../services/tutorial.service';
 import {MatTableDataSource} from '@angular/material/table';
@@ -9,6 +9,7 @@ import { MatDialog} from '@angular/material/dialog';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { DOCUMENT } from '@angular/common';
 
 
 @Component({
@@ -46,6 +47,7 @@ export class LandingPage implements OnInit {
     private _formBuilder: FormBuilder, 
     private tutorialService: TutorialService,
     private dialog: MatDialog,
+    @Inject(DOCUMENT) private doc: Document
     ) {
     }
   
@@ -86,6 +88,21 @@ export class LandingPage implements OnInit {
       }
     )
 
+    this.auth.user$.subscribe(userProfile => {
+      this.tutorialService.checkIfActive({userID:userProfile.sub})
+      .subscribe(
+        response => {
+          if(response.active == false) {
+            console.log(response.active) 
+            window.alert("Contact Site admin")
+            this.auth.logout({ returnTo: this.doc.location.origin });
+          }         
+        },
+        error => {
+          console.log(error);
+        }
+      )
+  });
     
 
  } 
