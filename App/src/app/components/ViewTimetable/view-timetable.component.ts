@@ -61,7 +61,8 @@ export class ViewTimetableComponent implements OnInit {
 
 
   onDelete() {
-    //console.log(this.myControl.value);
+    if (window.confirm("Do you really want to delete?")) { 
+          //console.log(this.myControl.value);
     this.tutorialService.deleteCourse({data:this.myControl.value, userEmail: localStorage.getItem('userEmail')})
     .subscribe(
       response => {
@@ -85,6 +86,8 @@ export class ViewTimetableComponent implements OnInit {
         console.log(error);
       }
     )
+    }
+
   }
 
 
@@ -95,19 +98,22 @@ export class ViewTimetableComponent implements OnInit {
   }
 
   deleteAll() {
-    this.tutorialService.deleteAll({userEmail:localStorage.getItem('userEmail')})
-    .subscribe(
-      response => {
-        console.log(response);
-        if(response.success == true) {
-          this.openSnackBar("Successfully Deleted","OK")
-          this.ngOnInit();
+    if (window.confirm("Do you really want to delete all?")) { 
+      this.tutorialService.deleteAll({userEmail:localStorage.getItem('userEmail')})
+      .subscribe(
+        response => {
+          console.log(response);
+          if(response.success == true) {
+            this.openSnackBar("Successfully Deleted","OK")
+            this.ngOnInit();
+          }
+        },
+        error => {
+          console.log(error);
         }
-      },
-      error => {
-        console.log(error);
-      }
-    )
+      )
+    }
+
   }
 
   onEdit(selectedTimetable) {
