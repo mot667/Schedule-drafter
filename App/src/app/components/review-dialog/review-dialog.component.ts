@@ -33,9 +33,9 @@ ngOnInit() {
 
 
   onConfirmClick(){
-      var courseInfo = JSON.parse(localStorage.getItem("reviewCourse"));
+    var courseInfo = JSON.parse(localStorage.getItem("reviewCourse"));
     console.log(this.addReviewFormGroup.value.review)
-    this.tutorialService.postReview({review:this.addReviewFormGroup.value.review,className:courseInfo.className, course:courseInfo})
+    this.tutorialService.postReview({review:this.addReviewFormGroup.value.review,className:courseInfo.className, course:courseInfo, isPublic:true})
     .subscribe(
       response => {
         console.log(response);

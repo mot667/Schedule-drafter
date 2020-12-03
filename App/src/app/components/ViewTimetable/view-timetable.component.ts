@@ -133,6 +133,9 @@ navigateToMakeTimetable() {
 navigateToViewTimetable() {
   this.router.navigate(['viewtimetable']);
 }
+navigateToViewReviews() {
+  this.router.navigate(['viewreviews']);
+}
 
 
 }
