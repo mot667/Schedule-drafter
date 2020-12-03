@@ -63,5 +63,9 @@ export class TutorialService {
     return this.http.post(`${baseUrl}/checkifadmin`, data);
   }
 
+  changeReviewStatus(data): Observable<any> {
+    return this.http.post(`${baseUrl}/changereviewstatus`, data);
+  }
+
 
 }

@@ -11,6 +11,9 @@ var timetable = require('../CourseInformation.json');
 const { response } = require("express");
 const {validationResult, check } = require('express-validator');
 const expAutoSan = require('express-autosanitizer');
+const  passport  =  require('passport');
+const  LocalStrategy  =  require('passport-local').Strategy;
+
 dotenv.config();
 
 var db = "";
@@ -28,6 +31,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(expAutoSan.all);
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.listen(3000, () => console.log("Server Up and running")); 
 for (var key = 0; key < timetable.length; key++) {
@@ -317,7 +332,7 @@ app.post('/api/postreview',async (req, res) => {
 //course
 
         
-    reviewCollection.insertOne({"review": req.autosan.body.review,"className": req.autosan.body.className,"subject":req.autosan.body.course.subject, "timestamp": datetime })
+    reviewCollection.insertOne({"review": req.autosan.body.review,"className": req.autosan.body.className,"subject":req.autosan.body.course.subject, "timestamp": datetime, "isPublic":req.autosan.body.isPublic})
         .then(result2 => {
             console.log("Posted");
             res.send({succes:true})
@@ -393,6 +408,25 @@ app.post('/api/timetable/deleteAll',(req,res) => {
     })
 
     
+})
+
+app.post('/api/changereviewstatus',(req,res) => {
+    var ObjectID = require('mongodb').ObjectID;
+    console.log(req.autosan.body.isPublic);
+/*
+    timetableCollection.deleteMany({userEmail:req.autosan.body.userEmail}, function(err,response) {
+        if (err) throw err;
+        res.send({success:true})
+    })
+    
+    */
+reviewCollection.updateOne({"_id":ObjectID(req.autosan.body.reviewID)},
+{$set: {"isPublic":!req.autosan.body.isPublic}}
+)
+.then(result2 => {
+    res.send(result2)
+})
+.catch(error => console.error(error))
 })
 
 

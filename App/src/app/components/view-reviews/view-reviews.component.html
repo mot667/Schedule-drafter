@@ -32,7 +32,7 @@
   <div class="content" role="main">
 
 
-    <mat-accordion class="example-headers-align" multi>
+    <mat-accordion *ngIf = "displayAdminStuff" class="example-headers-align" multi>
           
             
       <mat-expansion-panel *ngFor="let timetable of timetables">
@@ -43,6 +43,9 @@
           </mat-panel-title>
           <mat-panel-description>
             {{timetable.subject}}
+          </mat-panel-description>
+          <mat-panel-description *ngIf = "displayAdminStuff">
+            Public: {{timetable.isPublic}}
           </mat-panel-description>
         </mat-expansion-panel-header>
   
@@ -56,23 +59,57 @@
           <button mat-raised-button
           matTooltip="When clicked You can edit the Schedule"
           class="editButton"
-          (click) = "onEdit(timetable)"
-          class="makeHidden"
+          (click) = "changeStatus(timetable._id, timetable.isPublic)"
+          *ngIf = "displayAdminStuff"
         >
-          Make Hidden
+          Change Status
         </button>
-        <button mat-raised-button
-        matTooltip="When clicked You can edit the Schedule"
-        class="editButton"
-        (click) = "onEdit(timetable)"
-      >
-        Make Public
-      </button>
         </mat-card>
       </mat-expansion-panel>
    
   
   
     </mat-accordion>
+
+
+
+    <mat-accordion *ngIf = "!displayAdminStuff" class="example-headers-align" multi>
+          
+            
+        <mat-expansion-panel *ngFor="let timetable of publicTimetables">
+          
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{timetable.className}}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{timetable.subject}}
+            </mat-panel-description>
+            <mat-panel-description *ngIf = "displayAdminStuff">
+              Public: {{timetable.isPublic}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+    
+          <mat-card>
+              <mat-card>
+                 Review: {{timetable.review}}
+              </mat-card>
+              <mat-card>
+                  Timestamp: {{timetable.timestamp}}
+               </mat-card>
+            <button mat-raised-button
+            matTooltip="When clicked You can edit the Schedule"
+            class="editButton"
+            (click) = "changeStatus(timetable._id, timetable.isPublic)"
+            *ngIf = "displayAdminStuff"
+          >
+            Change Status
+          </button>
+          </mat-card>
+        </mat-expansion-panel>
+     
+    
+    
+      </mat-accordion>
     
   </div>

@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatStepperModule} from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClientModule } from '@angular/common/http';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
@@ -35,6 +34,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {EditTimetable} from './components/edit-timetable/edit-timetable.component';
 import {ReviewDialogComponent} from './components/review-dialog/review-dialog.component';
 import {ViewReviews} from './components/view-reviews/view-reviews.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 
@@ -55,7 +55,9 @@ import {ViewReviews} from './components/view-reviews/view-reviews.component';
     LandingPage,
     EditTimetable,
     ReviewDialogComponent,
-    ViewReviews
+    ViewReviews,
+
+
 
   ],
   imports: [
@@ -83,7 +85,7 @@ import {ViewReviews} from './components/view-reviews/view-reviews.component';
     }),
   ],
   exports:[MakeTimetable, ViewTimetableComponent,AlertDialogComponent, SearchCoursesComponent, LoginComponent, HomeOnceAuthed, LandingPage, EditTimetable, ReviewDialogComponent, ViewReviews],
-  providers: [],
+  providers: [], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }
