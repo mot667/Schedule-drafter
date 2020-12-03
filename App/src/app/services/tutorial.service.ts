@@ -75,5 +75,8 @@ export class TutorialService {
     return this.http.post(`${baseUrl}/getAllUsers`, data);
   }
 
+  makeAdmin(data): Observable<any> {
+    return this.http.post(`${baseUrl}/makeAdmin`, data);
+  }
 
 }
