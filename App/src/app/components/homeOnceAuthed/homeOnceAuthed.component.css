@@ -291,3 +291,8 @@
       visibility: hidden;
     }
   }
+
+
+  .makeAdminButton {
+    margin-left: 15px;
+  }
