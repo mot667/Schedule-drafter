@@ -16,6 +16,8 @@ export class HomeOnceAuthed implements OnInit {
   isAuthenticated: boolean;
   profileJson: string = null;
   userID = '';
+  allUsers = [] = [];
+  displayAdminStuff: boolean = false;
   
   constructor(
     private router: Router,
@@ -32,7 +34,44 @@ export class HomeOnceAuthed implements OnInit {
         this.userID = userProfile.sub;
         //console.log("userID: " + this.userID);
         localStorage.setItem('userEmail',this.profileJson);
+        this.tutorialService.addUser({userID:userProfile.sub})
+        .subscribe(
+          response => {
+              console.log(response)
+          },
+          error => {
+            console.log(error);
+          }
+        )
+
+        this.tutorialService.getAllUsers({})
+        .subscribe(
+          response => {
+              console.log(response)
+              this.allUsers = response;
+          },
+          error => {
+            console.log(error);
+          }
+        )
+
+        this.tutorialService.checkIfAdmin({userID: userProfile.sub})
+        .subscribe(
+          response => {
+            console.log(response)
+            if(response != null) {
+              this.displayAdminStuff = true;
+            }    
+          },
+          error => {
+            console.log(error);
+          }
+        )
+
+        
     });
+
+
 
 
 
@@ -55,6 +94,10 @@ export class HomeOnceAuthed implements OnInit {
 
   navigateToViewReviews() {
     this.router.navigate(['viewreviews']);
+  }
+
+  navigateToLandingPage() {
+    this.router.navigate(['']);
   }
 
   /*
