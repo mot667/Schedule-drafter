@@ -442,7 +442,7 @@ app.post('/api/adduser',(req,res) => {
     adminCollection.findOne({userID:req.autosan.body.userID})
     .then(result => {
         if(!result) {
-         adminCollection.insertOne({userID:req.autosan.body.userID, role:'user'})
+         adminCollection.insertOne({userID:req.autosan.body.userID, role:'user', active:true})
          .then(result2 => {
              console.log("Posted");
              res.send({succes:true})
@@ -475,6 +475,28 @@ app.post('/api/makeAdmin',(req,res) => {
     res.send(result2)
     })
     .catch(error => console.error(error))
+})
+
+
+app.post('/api/checkIfActive',(req,res) => {
+    console.log(req.autosan.body.userID);
+    adminCollection.findOne({userID: req.autosan.body.userID})
+    .then(results => {
+    res.send(results);
+    //  res.redirect('/timetable');
+    })
+    .catch(error => console.error(error))
+})
+
+app.post('/api/changeActive',(req,res) => {
+    console.log(req.autosan.body.active)
+    adminCollection.updateOne({"userID":req.autosan.body.userID},
+    {$set: {"active":!(req.autosan.body.active)}}
+    )
+    .then(result2 => {
+    res.send(result2)
+    })
+.catch(error => console.error(error))
 })
 
 
