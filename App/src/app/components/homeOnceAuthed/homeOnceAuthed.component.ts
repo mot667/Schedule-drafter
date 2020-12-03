@@ -15,7 +15,6 @@ export class HomeOnceAuthed implements OnInit {
   title = 'se3316-tkeech2-lab5';
   isAuthenticated: boolean;
   profileJson: string = null;
-  displayComments = false;
   userID = '';
   
   constructor(
@@ -33,18 +32,6 @@ export class HomeOnceAuthed implements OnInit {
         this.userID = userProfile.sub;
         //console.log("userID: " + this.userID);
         localStorage.setItem('userEmail',this.profileJson);
-        this.tutorialService.checkIfAdmin({userID: userProfile.sub})
-        .subscribe(
-          response => {
-            console.log(response)
-            if(response != null) {
-              this.displayComments = true;
-            }    
-          },
-          error => {
-            console.log(error);
-          }
-        )
     });
 
 

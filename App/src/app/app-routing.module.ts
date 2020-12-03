@@ -11,6 +11,8 @@ import {EditTimetable} from './components/edit-timetable/edit-timetable.componen
 import {ViewReviews} from './components/view-reviews/view-reviews.component';
 
 
+
+
 //canActivate: [AuthGuardService]
 const routes: Routes = [
   {path: '', component: LandingPage},
@@ -20,7 +22,7 @@ const routes: Routes = [
   {path:'maketimetable', component:MakeTimetable},
   {path:'viewtimetable', component:ViewTimetableComponent},
   {path: 'edittimetable', component:EditTimetable},
-  {path:'viewreviews', component: ViewReviews}
+  {path:'viewreviews', component: ViewReviews},
 ];
 
 @NgModule({
