@@ -112,6 +112,18 @@ export class HomeOnceAuthed implements OnInit {
     )
   }
 
+  changeActive(userID,active) {
+    this.tutorialService.changeActive({userID: userID, active:active})
+    .subscribe(
+      response => {
+        console.log(response)   
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
   /*
   navigateToTimetables() {
     this.tutorialService.navigateToTimetables()

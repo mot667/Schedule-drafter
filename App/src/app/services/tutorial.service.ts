@@ -79,4 +79,12 @@ export class TutorialService {
     return this.http.post(`${baseUrl}/makeAdmin`, data);
   }
 
+  checkIfActive(data): Observable<any> {
+    return this.http.post(`${baseUrl}/checkIfActive`, data);
+  }
+
+  changeActive(data): Observable<any> {
+    return this.http.post(`${baseUrl}/changeActive`, data);
+  }
+
 }
