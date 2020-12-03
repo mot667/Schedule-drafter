@@ -8,6 +8,7 @@ import { AlertDialogComponent } from '../alert-dialog/alert-dialog.component';
 import { MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from "@angular/router";
+import { AuthService } from '@auth0/auth0-angular';
 
 
 @Component({
@@ -17,14 +18,16 @@ import {Router} from "@angular/router";
 })
 export class ViewReviews implements OnInit {
   timetables: any[] = [];
+  publicTimetables: any[] = [];
   displayedColumns: string[] = ['ClassName', 'Subject', 'Review', 'timestamp'];
   dataSource: any = new MatTableDataSource(this.timetables);
 
   myControl = new FormControl();
   options: string[] = [];
   filteredOptions: Observable<string[]>;
+  displayAdminStuff: boolean = false;
 
-  constructor(private tutorialService: TutorialService,private dialog: MatDialog, private _snackBar: MatSnackBar,private router: Router) { 
+  constructor(private tutorialService: TutorialService,private dialog: MatDialog, private _snackBar: MatSnackBar,private router: Router,public auth: AuthService) { 
 
     
   }
@@ -39,19 +42,40 @@ export class ViewReviews implements OnInit {
 
         response.forEach(element => {
           this.options.push(element.className);
+          if(element.isPublic == true) {
+              this.publicTimetables.push(element);
+          }
         });
         this.filteredOptions = this.myControl.valueChanges
         .pipe(
           startWith(''),
           map(value => this._filter(value))
         );
-
-
+    
       },
       error => {
         console.log(error);
       }
     )
+
+
+    this.auth.user$.subscribe(userProfile => {
+        //console.log("userID: " + this.userID);
+        localStorage.setItem('userEmail',userProfile.email);
+        this.tutorialService.checkIfAdmin({userID: userProfile.sub})
+        .subscribe(
+          response => {
+            console.log(response)
+            if(response != null) {
+              this.displayAdminStuff = true;
+            }    
+          },
+          error => {
+            console.log(error);
+          }
+        )
+    });
+    
   }
 
   private _filter(value: string): string[] {
@@ -122,6 +146,18 @@ export class ViewReviews implements OnInit {
     this.router.navigate(['edittimetable'])
   }
 
+  changeStatus(id, isPublic) {
+      this.tutorialService.changeReviewStatus({reviewID:id, isPublic: isPublic})
+      .subscribe(
+        response => {
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+        }
+      )
+  }
+
   
 navigateToTimetable() {
   this.router.navigate(['search']);
@@ -134,6 +170,9 @@ navigateToMakeTimetable() {
 navigateToViewTimetable() {
   this.router.navigate(['viewtimetable']);
 }
+navigateToViewReviews() {
+    this.router.navigate(['viewreviews']);
+  }
 
 
 }
