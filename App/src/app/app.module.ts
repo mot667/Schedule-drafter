@@ -82,6 +82,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     MatSlideToggleModule,
     AuthModule.forRoot({
       ...env.auth,
+      production:true
     }),
   ],
   exports:[MakeTimetable, ViewTimetableComponent,AlertDialogComponent, SearchCoursesComponent, LoginComponent, HomeOnceAuthed, LandingPage, EditTimetable, ReviewDialogComponent, ViewReviews],
