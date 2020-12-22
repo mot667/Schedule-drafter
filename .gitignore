@@ -7,7 +7,7 @@
 # Only exists if Bazel was run
 /bazel-out
 .env
-./App/auth_config.json
+/App/auth_config.json
 
 # dependencies
 node_modules/
